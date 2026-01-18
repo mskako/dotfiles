@@ -1,0 +1,12 @@
+[user]
+	email = masaki.ako@gmail.com
+	name = Masaki AKO
+[core]
+	editor = nvim
+	pager = cat
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	lg = log --oneline --graph
