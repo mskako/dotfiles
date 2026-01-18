@@ -11,9 +11,18 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
+      local function charcode()
+        local char = vim.fn.strcharpart(vim.fn.strpart(vim.fn.getline("."), vim.fn.col(".") - 1), 0, 1)
+        if char == "" then return "" end
+        local code = vim.fn.char2nr(char)
+        return string.format("U+%04X", code)
+      end
       require("lualine").setup({
         options = {
           theme = "auto",
+        },
+        sections = {
+          lualine_y = { charcode, "progress" },
         },
       })
     end,
