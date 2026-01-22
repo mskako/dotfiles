@@ -33,11 +33,11 @@ vim.opt.clipboard = "unnamedplus"
 -- Show invisible characters
 vim.opt.list = true
 vim.opt.listchars = {
-  tab = "Γû╕ ",      -- Tab character
-  trail = "┬╖",     -- Trailing spaces
-  eol = "Γå▓",       -- LF (Unix line ending)
-  nbsp = "ΓÉú",      -- Non-breaking space
-  extends = "Γ¥»",   -- Line extends beyond screen
-  precedes = "Γ¥«",  -- Line starts before screen
+  tab = "▸ ",      -- Tab character
+  trail = "·",     -- Trailing spaces
+  eol = "↲",       -- LF (Unix line ending)
+  nbsp = "␣",      -- Non-breaking space
+  extends = "❯",   -- Line extends beyond screen
+  precedes = "❮",  -- Line starts before screen
 }
 -- Note: CR (carriage return, \r) in CRLF files shows as ^M automatically
