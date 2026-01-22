@@ -29,3 +29,15 @@ vim.opt.smartindent = true
 vim.opt.termguicolors = true
 vim.opt.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
+
+-- Show invisible characters
+vim.opt.list = true
+vim.opt.listchars = {
+  tab = "Γû╕ ",      -- Tab character
+  trail = "┬╖",     -- Trailing spaces
+  eol = "Γå▓",       -- LF (Unix line ending)
+  nbsp = "ΓÉú",      -- Non-breaking space
+  extends = "Γ¥»",   -- Line extends beyond screen
+  precedes = "Γ¥«",  -- Line starts before screen
+}
+-- Note: CR (carriage return, \r) in CRLF files shows as ^M automatically
