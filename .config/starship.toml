@@ -1,37 +1,37 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[ΓûæΓûÆΓûô](#d9d1af)\
-[ ≤░òê ](bg:#d9d1af fg:#090c0c)\
-[εé┤](bg:#a89b60 fg:#d9d1af)\
+[░▒▓](#d9d1af)\
+[ 󰕈 ](bg:#d9d1af fg:#090c0c)\
+[](bg:#a89b60 fg:#d9d1af)\
 $directory\
-[εé┤](fg:#a89b60 bg:#5a4d2f)\
+[](fg:#a89b60 bg:#5a4d2f)\
 $git_branch\
 $git_status\
-[εé┤](fg:#5a4d2f bg:#3a3227)\
+[](fg:#5a4d2f bg:#3a3227)\
 $nodejs\
 $rust\
 $golang\
 $php\
-[εé┤](fg:#3a3227 bg:#2a241c)\
+[](fg:#3a3227 bg:#2a241c)\
 $time\
-[εé┤ ](fg:#2a241c)\
+[ ](fg:#2a241c)\
 \n$character"""
 
 [directory]
 style = "fg:#ffffff bg:#a89b60"
 format = "[ $path ]($style)"
 truncation_length = 3
-truncation_symbol = "ΓÇª/"
+truncation_symbol = "…/"
 
 [directory.substitutions]
-"Documents" = "≤░êÖ "
-"Downloads" = "∩ÇÖ "
-"Music" = "∩Çü "
-"Pictures" = "∩Ç╛ "
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
 
 [git_branch]
-symbol = "∩Éÿ"
+symbol = ""
 style = "bg:#5a4d2f"
 format = '[[ $symbol $branch ](fg:#a89b60 bg:#5a4d2f)]($style)'
 
@@ -40,22 +40,22 @@ style = "bg:#5a4d2f"
 format = '[[($all_status$ahead_behind )](fg:#a89b60 bg:#5a4d2f)]($style)'
 
 [nodejs]
-symbol = "ε£ÿ"
+symbol = ""
 style = "bg:#3a3227"
 format = '[[ $symbol ($version) ](fg:#a89b60 bg:#3a3227)]($style)'
 
 [rust]
-symbol = "ε₧¿"
+symbol = ""
 style = "bg:#3a3227"
 format = '[[ $symbol ($version) ](fg:#a89b60 bg:#3a3227)]($style)'
 
 [golang]
-symbol = "εÿº"
+symbol = ""
 style = "bg:#3a3227"
 format = '[[ $symbol ($version) ](fg:#a89b60 bg:#3a3227)]($style)'
 
 [php]
-symbol = "εÿê"
+symbol = ""
 style = "bg:#3a3227"
 format = '[[ $symbol ($version) ](fg:#a89b60 bg:#3a3227)]($style)'
 
@@ -63,4 +63,4 @@ format = '[[ $symbol ($version) ](fg:#a89b60 bg:#3a3227)]($style)'
 disabled = false
 time_format = "%T" # Hour:Minute Format
 style = "bg:#2a241c"
-format = '[[ ∩É║ $time ](fg:#d0c5a0 bg:#2a241c)]($style)'
+format = '[[  $time ](fg:#d0c5a0 bg:#2a241c)]($style)'
