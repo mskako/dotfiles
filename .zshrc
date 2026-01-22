@@ -1,9 +1,3 @@
-# Set up the prompt
-
-autoload -Uz promptinit
-promptinit
-prompt adam1
-
 setopt histignorealldups sharehistory
 
 # Use emacs keybindings even if our EDITOR is set to vi
@@ -37,6 +31,9 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 export PATH="$HOME/.local/bin:$PATH"
+
+# Starship prompt (after brew shellenv)
+eval "$(starship init zsh)"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -80,3 +77,60 @@ zinit ice wait lucid
 zinit light zsh-users/zsh-autosuggestions
 
 alias ll='ls -ltrFa --color=auto'
+
+# SSH Agent (8h expiration)
+SSH_ENV="${HOME}/.ssh/ssh.env"
+DEFAULT_KEY="${HOME}/.ssh/id_rsa"
+function start_agent {
+  echo "Initialising new SSH agent..."
+  ssh-agent -t 28800 > "${SSH_ENV}"
+  chmod 600 "${SSH_ENV}"
+  . "${SSH_ENV}" > /dev/null
+}
+
+if [ -f "${SSH_ENV}" ]; then
+  . "${SSH_ENV}" > /dev/null
+  ps -ef | grep "${SSH_AGENT_PID}" | grep ssh-agent > /dev/null || start_agent
+else
+  start_agent
+fi
+ssh-add -l > /dev/null || ssh-add "$DEFAULT_KEY"
+
+# WSL2 integration
+function open() {
+  if [ $# -eq 0 ]; then
+    explorer.exe .
+  else
+    if [ -e "$1" ]; then
+      cmd.exe /c start "$(wslpath -w "$1")" 2> /dev/null
+    else
+      echo "open: $1 : No such file or directory"
+    fi
+  fi
+}
+
+# Git branch checkout with fzf
+fbr() {
+  local branches branch
+  branches=$(git branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
+fbrm() {
+  local branches branch
+  branches=$(git branch --all | grep -v HEAD) &&
+  branch=$(echo "$branches" |
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+# Aliases
+alias pbcopy='clip.exe'
+alias lld='lsd -ltrFa'
+alias vi='nvim'
+alias view='nvim -R'
+
+# Environment
+EDITOR="nvim"
+export AWS_PAGER=""
